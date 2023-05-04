@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Campo Minado</title>
+	<style>
+		table tr {
+			display: flex;
+		}
+
+		table td {
+			font-size: 18px;
+			width: 28px;
+			height: 28px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	</style>
+</head>
+<body>
+	<table>
+	</table>
+
+	<script type="module">
+		import createGame from './game.js'
+
+		const game = createGame()
+
+		game.start()
+
+		const table = document.getElementsByTagName('table')[0]
+
+		for (let i=0; i<(game.state.squaresMaxAmount/game.state.squaresPerLine); i++) {
+			const tr = document.createElement('tr')
+			table.appendChild(tr)
+
+			for (let j=10*i; j<(game.state.squaresPerLine*(i+1)); j++) {
+				const td = document.createElement('td')
+				td.dataset.index = j
+				td.innerText = '-'
+				td.style.cursor = 'pointer'
+				
+				if (td.innerText === '-1') {
+					td.style.backgroundColor = 'red'
+				}
+
+				if (td.innerText === '1') {
+					td.style.backgroundColor = 'blue'
+				}
+
+				if (td.innerText === '2') {
+					td.style.backgroundColor = 'green'
+				}
+
+				if (td.innerText === '3') {
+					td.style.backgroundColor = '#9d00ff'
+				}
+				
+				if (td.innerText === '4') {
+					td.style.backgroundColor = 'orange'
+				}
+
+				tr.appendChild(td)
+			}
+		}
+	</script>
+</body>
+</html>
